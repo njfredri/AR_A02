@@ -85,22 +85,30 @@ def compute_H_UsingSVD(points1, points2):
   return H
 
 def projH(points, H):
-    q = np.ones(3)
-    print(points.shape)
-    if points.shape[1] <=2: #add 1 to the end
-        q[:2] = points
-    else:
-        q[:] = points
-    #project using H
-    temp = np.dot(H,q)
-    temp = temp/temp[2] #make 3rd dim 1
-    print(temp)
+    predictpoints = np.zeros(points.shape)
+    for i in range(points.shape[0]):
+        q = np.ones(3)
+        point = points[i,:]
+        if point.shape[0] <=2: #add 1 to the end
+            q[:2] = point
+        else:
+            q[:] = point
+        #project using H
+        temp = np.dot(H,q)
+        temp = temp/temp[2] #make 3rd dim 1
+        predictpoints[i,:] = temp[:2]
+    return predictpoints
+
 
 img1 = np.array([[331,345],[305,357],[486,412],[477,437],[409,451],[356,565],[251,438],[220,466]])
 img2 = np.array([[262,471],[260,495],[421,412],[443,426],[431,472],[531,549],[337,569],[355,606]])
 #• Select 4 of the 8 correspondences between images 1 and 2 and find H (2 points).
 H1 = compute_H_UsingSVD(img1[:4], img2[:4]) #find h for first 4 points
-check_H(H1, img1, img2)
+# check_H(H1, img1, img2)
+
+print('now projecting')
 img2_hproj = projH(img1[4:], H1)
-print('Error: ' + str(sum(np.abs(img2[4,:] - img2_hproj))))
+print(img2_hproj)
+print(img2[4:,:])
+print('Total error between projection and actual: ' + str(sum(sum(np.abs(img2[4:,:] - img2_hproj)))))
 #Use H to transform the remaining point observations in image 1, projected into image 2
