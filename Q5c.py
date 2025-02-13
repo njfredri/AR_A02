@@ -102,13 +102,42 @@ def projH(points, H):
 
 img1 = np.array([[331,345],[305,357],[486,412],[477,437],[409,451],[356,565],[251,438],[220,466]])
 img2 = np.array([[262,471],[260,495],[421,412],[443,426],[431,472],[531,549],[337,569],[355,606]])
+img3 = np.array([[322,463],[317,476],[424,458],[431,471],[411,499],[438,563],[336,536],[337,559]])
 #• Select 4 of the 8 correspondences between images 1 and 2 and find H (2 points).
 H1 = compute_H_UsingSVD(img1[:4], img2[:4]) #find h for first 4 points
 # check_H(H1, img1, img2)
-
-print('now projecting')
-img2_hproj = projH(img1[4:], H1)
-print(img2_hproj)
-print(img2[4:,:])
-print('Total error between projection and actual: ' + str(sum(sum(np.abs(img2[4:,:] - img2_hproj)))))
 #Use H to transform the remaining point observations in image 1, projected into image 2
+print('\nnow projecting remaining image 1 points to image 2')
+img2_hproj = projH(img1[4:], H1)
+print('\nactual image2 points:\n' + str(img2[4:,:]))
+print('projected to image2:\n' + str(img2_hproj))
+print('Total error between projection img1 -> img2 and actual img2: ' + str(sum(sum(np.abs(img2[4:,:] - img2_hproj)))))
+
+# Use H to transform the remaining point observations in image 1, projected into
+# image 3. Are these points corrrectly projected in image 3? Why?
+# These points are not correctly translated to 3. The error is significantly higher
+# This is because H was made with the correspondences of image 1 to image 2, not image 1 to image 3.
+print('\nnow projecting remaining image 1 points to image 3')
+img3_hproj = projH(img1[4:], H1)
+print('\nactual image3 points:\n' + str(img3[4:,:]))
+print('projected to image3:\n' + str(img3_hproj))
+print('Total error between projection img1 -> img3 and actual img3: ' + str(sum(sum(np.abs(img3[4:,:] - img3_hproj)))))
+
+#Calculate a new H to find point correspondences between images 1 and 3
+print('\n\nCalculating new H for image 1 -> image 3')
+H2 = compute_H_UsingSVD(img1[:4], img3[:4])
+
+# Can you use the H functions computed earlier to find correspondences between
+# images 2 and 3? Explain why
+
+print('\nnow projecting remaining image 1 points to image 2')
+img2_hproj = projH(img1[4:], H2)
+print('\nactual image2 points:\n' + str(img2[4:,:]))
+print('projected to image2:\n' + str(img2_hproj))
+print('Total error between projection img1 -> img2 and actual img2: ' + str(sum(sum(np.abs(img2[4:,:] - img2_hproj)))))
+
+print('\nnow projecting remaining image 1 points to image 3')
+img3_hproj = projH(img1[4:], H2)
+print('\nactual image3 points:\n' + str(img3[4:,:]))
+print('projected to image3:\n' + str(img3_hproj))
+print('Total error between projection img1 -> img3 and actual img3: ' + str(sum(sum(np.abs(img3[4:,:] - img3_hproj)))))
