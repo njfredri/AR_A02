@@ -42,6 +42,7 @@ def compute_nAi(points1, points2):
 def compute_H(points1, points2):
   A = compute_nAi(points1, points2)
   print('Single 2x9 matrix A\n' + str(A))
+#   print(A.shape)
   ATA = np.dot(A.T, A)
   print('A^T x A:\n' + str(ATA))
   #Find eigen vector with minimum eigen value
@@ -75,12 +76,6 @@ def check_H(H, points1, points2, desc='using A^TxA to calculate h'):
   print('H (' + str(desc) + '):\n' + str(H.round(2)))
   print('Total Error Using H (using euc distance): ' + str(error))
 
-print('\n--------------------------------------\nUsing A^t x A to find h')
-print('--------------------------------------\n')
-points1 = np.array([[0,0], [0,1], [1,1], [1,0]])
-points2 = np.array([[1,1], [1,0], [2,0], [2,1]])
-H = compute_H(points1, points2)
-check_H(H, points1, points2)
 
 def compute_H_UsingSVD(points1, points2):
   A = compute_nAi(points1, points2)

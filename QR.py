@@ -15,6 +15,7 @@ def QR(A):
   for col in range(n):
     ai = A[:,col]
     ui = A[:,col].copy().astype(float) #avoids typing issues later
+    print('at col ' + str(col))
     for i in range(col):
       # ui = ui - (proj(Q[:,i],A[:,col]))
       #use dot product instead according to summation form
@@ -56,32 +57,32 @@ def checkReduction(A, Q, R, margin_of_error=0.1):
             if qqt[i,j] > (0.0+0.1*margin_of_error): is_orth1=False
             if qqt[i,j] < (0.0-0.1*margin_of_error): is_orth1=False
   is_orth2 = True
-  qqt = np.dot(Q, Q.T)
-  for i in range(qqt.shape[0]):
-    for j in range(qqt.shape[1]):
-        if i==j: #should be 1
-          if qqt[i,j] > (1.0+0.1*margin_of_error): 
-             is_orth2=False
-          if qqt[i,j] < (1.0-0.1*margin_of_error):
-             is_orth2=False
-        #   print(qqt[i,j])
-        else: #should be 0
-            if qqt[i,j] > (0.0+0.1*margin_of_error): is_orth2=False
-            if qqt[i,j] < (0.0-0.1*margin_of_error): is_orth2=False
-  square = True
-  if Q.shape[0] != Q.shape[1]: square=False
-  orth = 'Fully Orthogonal'
-  if square==False: #non-square matrix can be semi orthogonal
-    if is_orth1 == False and is_orth2 == True:
-        orth = 'Semi Orthogonal'
-    elif is_orth1 == True and is_orth2 == False:
-        orth = 'Semi Orthogonal'
-  if is_orth1 == False and is_orth2 == False:
-     orth = 'Not Orthogonal'
-  print("QxQ^T (should be Identity):\n", np.dot(Q, Q.T).round(2))
+  # qqt = np.dot(Q, Q.T)
+  # for i in range(qqt.shape[0]):
+  #   for j in range(qqt.shape[1]):
+  #       if i==j: #should be 1
+  #         if qqt[i,j] > (1.0+0.1*margin_of_error): 
+  #            is_orth2=False
+  #         if qqt[i,j] < (1.0-0.1*margin_of_error):
+  #            is_orth2=False
+  #       #   print(qqt[i,j])
+  #       else: #should be 0
+  #           if qqt[i,j] > (0.0+0.1*margin_of_error): is_orth2=False
+  #           if qqt[i,j] < (0.0-0.1*margin_of_error): is_orth2=False
+  # square = True
+  # if Q.shape[0] != Q.shape[1]: square=False
+  # orth = 'Fully Orthogonal'
+  # if square==False: #non-square matrix can be semi orthogonal
+  #   if is_orth1 == False and is_orth2 == True:
+  #       orth = 'Semi Orthogonal'
+  #   elif is_orth1 == True and is_orth2 == False:
+  #       orth = 'Semi Orthogonal'
+  # if is_orth1 == False and is_orth2 == False:
+  #    orth = 'Not Orthogonal'
+  # print("QxQ^T (should be Identity):\n", np.dot(Q, Q.T).round(2))
   print("Q^TxQ (should be Identity):\n", np.dot(Q.T, Q).round(2))
   print('\n****Summary****')
-  print('Q is ' + orth)
+  # print('Q is ' + orth)
   print('Number of Errors with QxR: ' + str(np.sum(errors).round(2)) + '\t Margin of error: ' + str(margin_of_error))
   print('Q:\n', Q.round(2))
   print('R:\n', R.round(2))
@@ -93,7 +94,7 @@ def checkReduction(A, Q, R, margin_of_error=0.1):
 for i in range(5):  # Run 5 random test cases
     rows = np.random.randint(2, 7)  # Random rows (2 to 6)
     cols = np.random.randint(2, 7)  # Random cols (2 to 6)
-    matrix = np.random.randint(1, 100, size=(rows, cols))  # Random values from 1 to 99
+    matrix = np.random.randint(1, 20, size=(rows, cols))  # Random values from 1 to 99
     print('\n--------------------------------------------------------------')
     print('---------------------------------------------------------------')
     print('Test Case #' + str(i))

@@ -38,11 +38,12 @@ def LU_Decomp(A):
 def checkLU(A, L, U, margin_of_error=0.1):
   print('\n\n****Checking the LU Decomposition****\n')
   print('Margin of error is ' + str(margin_of_error))
-  L2, U2 = scipy.linalg.LU(A)
+  # L2, U2 = scipy.linalg.LU(A)
+  _, L2, U2 = scipy.linalg.lu(A)
   Aprime = np.dot(L,U)
-  print('numpy reference L and U')
-  print('L:\n', L2)
-  print('U:\n', U2)
+  print('scipy reference L and U')
+  print('L:\n', L2.round(2))
+  print('U:\n', U2.round(2))
   diff = A - Aprime
   diff = np.abs(diff)
   print('Recreated A using LxU: \n' + str(Aprime.round(2)))
