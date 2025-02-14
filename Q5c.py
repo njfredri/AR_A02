@@ -1,5 +1,5 @@
-import numpy as np
-import numpy.linalg as la
+import numpy as np # type: ignore
+import numpy.linalg as la # type: ignore
 import random
 
 def compute_Ai(p1,p2):
@@ -136,7 +136,7 @@ print('\nactual image2 points:\n' + str(img2[4:,:]))
 print('projected to image2:\n' + str(img2_hproj))
 print('Total error between projection img1 -> img2 and actual img2: ' + str(sum(sum(np.abs(img2[4:,:] - img2_hproj)))))
 
-print('\nnow projecting remaining image 1 points to image 3')
+print('\npredicted points using H image 1 points to image 3')
 img3_hproj = projH(img1[4:], H2)
 print('\nactual image3 points:\n' + str(img3[4:,:]))
 print('projected to image3:\n' + str(img3_hproj))
