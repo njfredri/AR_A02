@@ -16,15 +16,16 @@ def LU_Decomp(A):
     xT = uT #uT = xT
     if(beta == 0): print('WARNING! Dividing by 0. Resulting LU may be impacted.')
     w = v/beta #v = beta*w
-    #calculate A* = wxT + L*U*
-    #Call LU Decomp recursively to retrieve L* and U *
-    # result = LU_Decomp(Astar-np.dot(w,xT))
-    # apparently, the wx^t is supposed to be a matrix, not a dot product
+    
+    # apparently, the wx^T is supposed to be a matrix, not a dot product
     # changing from np.dot() to np.outer seems to have corrected the output
+    # Calculate A* = wxT + L*U*
+    # Call LU Decomp recursively to retrieve L* and U *
     Lstar, Ustar = LU_Decomp(Astar-np.outer(w,xT))
+
     #create updated L and U
-    L = np.eye(m)
-    U = np.zeros((m, n))
+    L = np.eye(m) #set L initially to an identity matrix
+    U = np.zeros((m, n)) #set U initially to a matrix of zero
     # L[0,0] = 1 already done with identity matrix
     L[1:,0] = w
     L[1:,1:] = Lstar
@@ -33,6 +34,7 @@ def LU_Decomp(A):
     U[1:,1:] = Ustar
     return L, U
   else:
+    #Terminate the recursive loop when A is scalar
     return np.array([[1]]), A
 
 def checkLU(A, L, U, margin_of_error=0.1):
