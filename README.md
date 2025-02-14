@@ -1,6 +1,4 @@
 
-
-
 The images have the following recorded point coordinates:
 
 
@@ -35,3 +33,106 @@ Image 3s
 * 6 (438,563)
 * 7 (336,536)
 * 8 (337,559)
+
+
+
+------------Results-------------
+
+Calculating new H for image 1 -> image 2
+H predicted:
+[[ 3.30000e+00  4.56000e+00 -1.86984e+03]
+ [ 3.00000e-02  2.16000e+00  6.70140e+02]
+ [ 0.00000e+00  0.00000e+00  1.00000e+00]]
+
+now projecting remaining image 1 points to image 2
+
+actual image2 points:
+[[431 472]
+ [531 549]
+ [337 569]
+ [355 606]]
+projected to image2:
+[[432.6515947  467.49927352]
+ [537.74526337 544.35114125]
+ [337.79117404 575.49296256]
+ [358.54296232 616.77448225]]
+Total error between projection img1 -> img2 and actual img2: 39.14802447725316
+
+now projecting remaining image 1 points to image 3
+
+actual image3 points:
+[[411 499]
+ [438 563]
+ [336 536]
+ [337 559]]
+projected to image3:
+[[432.6515947  467.49927352]
+ [537.74526337 544.35114125]
+ [337.79117404 575.49296256]
+ [358.54296232 616.77448225]]
+Total error between projection img1 -> img3 and actual img3: 292.14802447725316
+----------------------------------------------
+
+
+Calculating new H for image 1 -> image 3
+H predicted:
+[[ 1.7400e+00  3.0300e+00 -7.3338e+02]
+ [-1.7000e-01  3.2600e+00  2.0734e+02]
+ [ 0.0000e+00  0.0000e+00  1.0000e+00]]
+
+now projecting remaining image 1 points to image 2
+
+actual image2 points:
+[[431 472]
+ [531 549]
+ [337 569]
+ [355 606]]
+projected to image2:
+[[411.41482086 492.27666266]
+ [437.52355863 544.48995742]
+ [340.60921057 526.24303739]
+ [342.63631061 544.96585392]]
+Total error between projection img1 -> img2 and actual img2: 257.6123344022093
+
+predicted points using H image 1 points to image 3
+
+actual image3 points:
+[[411 499]
+ [438 563]
+ [336 536]
+ [337 559]]
+projected to image3:
+[[411.41482086 492.27666266]
+ [437.52355863 544.48995742]
+ [340.60921057 526.24303739]
+ [342.63631061 544.96585392]]
+Total error between projection img1 -> img3 and actual img3: 60.161272027928476
+----------------------------------------------
+
+predicted points using H image 2 points to image 3 using first H (aka H of 1->2)
+
+actual image3 points:
+[[411 499]
+ [438 563]
+ [336 536]
+ [337 559]]
+projected to image3:
+[[462.94340177 463.28695752]
+ [561.35805846 441.16097436]
+ [537.00462964 559.12234655]
+ [580.0547413  559.78895336]]
+Total error between projection img2 -> img3 and actual img3: 800.8241991925338
+
+predicted points using H image 2 points to image 3 second H (aka H 1->3)
+
+actual image3 points:
+[[411 499]
+ [438 563]
+ [336 536]
+ [337 559]]
+projected to image3:
+[[428.27835772 495.53937266]
+ [487.64607536 501.94379427]
+ [432.66315465 549.99785863]
+ [451.29583397 556.69029037]]
+Total error between projection img2 -> img3 and actual img3: 358.7078230280603
