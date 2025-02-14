@@ -41,14 +41,15 @@ def compute_nAi(points1, points2):
 
 def compute_H(points1, points2):
   A = compute_nAi(points1, points2)
-  print('Single 2x9 matrix A\n' + str(A))
-#   print(A.shape)
+  print('Single 2nx9 matrix A\n' + str(A))
   ATA = np.dot(A.T, A)
   print('A^T x A:\n' + str(ATA))
   #Find eigen vector with minimum eigen value
   e_val, e_vec = la.eig(ATA)
   min_index = np.argmin(e_val)
+  #set h equal to the selected eigen vector.
   h = e_vec[:, min_index]
+  #"fold" h to construct H
   H = np.zeros((3,3))
   H[0,:] = h[0:3]
   H[1,:] = h[3:6]
@@ -56,7 +57,7 @@ def compute_H(points1, points2):
   for i in range(3):
     for j in range(3):
       H[i,j] = H[i,j] / H[2,2]
-  print('H predicted:\n' + str(H.round(2)))
+  print('H calculated:\n' + str(H.round(2)))
   return H
 
 def check_H(H, points1, points2, desc='using A^TxA to calculate h'):
@@ -79,10 +80,12 @@ def check_H(H, points1, points2, desc='using A^TxA to calculate h'):
 
 def compute_H_UsingSVD(points1, points2):
   A = compute_nAi(points1, points2)
+  print('Single 2nx9 matrix A\n' + str(A))
   #Find eigen vector with minimum eigen value
   u, s, vh = la.svd(A)
   #smallest eigen vector is last in vh
   h = vh[-1,:]
+  print('h=last eigen vector from la.svd()\n' + str(h))
   H = np.zeros((3,3))
   H[0,:] = h[0:3]
   H[1,:] = h[3:6]
@@ -90,7 +93,7 @@ def compute_H_UsingSVD(points1, points2):
   for i in range(3):
     for j in range(3):
       H[i,j] = H[i,j] / H[2,2]
-#   print('H predicted:\n' + str(H.round(2)))
+  print('H calculated:\n' + str(H.round(2)))
   return H
 
 print('\n---------------------------------------\nUsing SVD')

@@ -34,7 +34,7 @@ Finally, a summary is given printing the error count along with the calculated Q
 
 
 ------------------------------------------------------------------------------
-Sample output for running the QR code:
+Sample output for running the code:
 ------------------------------------------------------------------------------
 
 C:\Users\Njfre\AR_A02>python QR.py 

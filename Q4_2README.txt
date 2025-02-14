@@ -1,5 +1,11 @@
-To check LU decomposition on windows, use either './run_Q4_2.bat' or 'python LU.py' in command line
+To check LU decomposition on windows, use either './run_Q4_2.bat' or 'python LU.py'   
 An example output is given in Q4_2_output.txt
+
+#####################*Python Version Warning*#####################
+Python version 3.11.5 used.
+In another version of python scipy.linalg.lu() was replaced with scipy.linalg.LU().
+If an error with this occurs while running run_Q4_2.bat or LU.py, go to line 41 and 42 to switch which method is being called.
+
 ----------------------------------------------------------------------------------------------
 code explaination
 ----------------------------------------------------------------------------------------------
@@ -23,7 +29,7 @@ L and U are calculated with the scipy library to double check the results.
 Finally a summary of the errors and the calculated L and U matrices are printed.
 
 ------------------------------------------------------------------------------
-Sample output for running the QR code:
+Sample output for running the code:
 ------------------------------------------------------------------------------
 
 

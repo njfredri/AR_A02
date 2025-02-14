@@ -2,7 +2,7 @@ import numpy as np # type: ignore
 import numpy.linalg as la # type: ignore
 import random
 
-def compute_Ai(p1,p2):
+def compute_Ai(p1,p2): #compute a 2x9 matrix using 2 corresponding points
   dim = p1.shape[0]
   w2=1
   x2=p2[0]
@@ -41,13 +41,15 @@ def compute_nAi(points1, points2):
 
 def compute_H(points1, points2):
   A = compute_nAi(points1, points2)
-  print('Single 2x9 matrix A\n' + str(A))
+  print('Single 2nx9 matrix A\n' + str(A))
   ATA = np.dot(A.T, A)
   print('A^T x A:\n' + str(ATA))
   #Find eigen vector with minimum eigen value
   e_val, e_vec = la.eig(ATA)
   min_index = np.argmin(e_val)
+  #set h equal to the selected eigen vector.
   h = e_vec[:, min_index]
+  #"fold" h to construct H
   H = np.zeros((3,3))
   H[0,:] = h[0:3]
   H[1,:] = h[3:6]
@@ -55,7 +57,7 @@ def compute_H(points1, points2):
   for i in range(3):
     for j in range(3):
       H[i,j] = H[i,j] / H[2,2]
-  print('H predicted:\n' + str(H.round(2)))
+  print('H calculated:\n' + str(H.round(2)))
   return H
 
 def check_H(H, points1, points2, desc='using A^TxA to calculate h'):
@@ -82,26 +84,26 @@ points2 = np.array([[1,1], [1,0], [2,0], [2,1]])
 H = compute_H(points1, points2)
 check_H(H, points1, points2)
 
-def compute_H_UsingSVD(points1, points2):
-  A = compute_nAi(points1, points2)
-  #Find eigen vector with minimum eigen value
-  u, s, vh = la.svd(A)
-  #smallest eigen vector is last in vh
-  h = vh[-1,:]
-  H = np.zeros((3,3))
-  H[0,:] = h[0:3]
-  H[1,:] = h[3:6]
-  H[2,:] = h[6:9]
-  for i in range(3):
-    for j in range(3):
-      H[i,j] = H[i,j] / H[2,2]
-#   print('H predicted:\n' + str(H.round(2)))
-  return H
+# def compute_H_UsingSVD(points1, points2):
+#   A = compute_nAi(points1, points2)
+#   #Find eigen vector with minimum eigen value
+#   u, s, vh = la.svd(A)
+#   #smallest eigen vector is last in vh
+#   h = vh[-1,:]
+#   H = np.zeros((3,3))
+#   H[0,:] = h[0:3]
+#   H[1,:] = h[3:6]
+#   H[2,:] = h[6:9]
+#   for i in range(3):
+#     for j in range(3):
+#       H[i,j] = H[i,j] / H[2,2]
+# #   print('H predicted:\n' + str(H.round(2)))
+#   return H
 
-print('\n---------------------------------------\nUsing SVD')
-print('--------------------------------------\n')
+# print('\n---------------------------------------\nUsing SVD')
+# print('--------------------------------------\n')
 
-points1 = np.array([[0,0], [0,1], [1,1], [1,0]])
-points2 = np.array([[1,1], [1,0], [2,0], [2,1]])
-H = compute_H_UsingSVD(points1, points2)
-check_H(H, points1, points2, desc='using SVD to calculate h')
+# points1 = np.array([[0,0], [0,1], [1,1], [1,0]])
+# points2 = np.array([[1,1], [1,0], [2,0], [2,1]])
+# H = compute_H_UsingSVD(points1, points2)
+# check_H(H, points1, points2, desc='using SVD to calculate h')

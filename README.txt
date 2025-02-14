@@ -21,6 +21,7 @@ Results for QR and LU also include checks for correct values. QR has an orthogon
 Q should be either fully orthogonal, semi-orthogonal (for some non-square matrices). It will also say if Q is not orthogonal.
 
 To run Question 5a results on windows, use either './run_Q5a.bat' or 'python python Q5a.py'  
+To run Question 5a results on windows, use either './run_Q5b.bat' or 'python python Q5b.py'  
 To run Question 5c results on windows, use either './run_Q5c.bat' or 'python python Q5c.py'  
 
 Results for question 5 are also included in this document and a separate text files.

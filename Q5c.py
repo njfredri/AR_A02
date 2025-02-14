@@ -53,7 +53,7 @@ def compute_H(points1, points2):
   for i in range(3):
     for j in range(3):
       H[i,j] = H[i,j] / H[2,2]
-  print('H predicted:\n' + str(H.round(2)))
+  print('H calculated:\n' + str(H.round(2)))
   return H
 
 def check_H(H, points1, points2, using='A^TxA to calculate h'):
@@ -87,7 +87,7 @@ def compute_H_UsingSVD(points1, points2):
   for i in range(3):
     for j in range(3):
       H[i,j] = H[i,j] / H[2,2]
-  print('H predicted:\n' + str(H.round(2)))
+  print('H calculated:\n' + str(H.round(2)))
   return H
 
 def projH(points, H):
