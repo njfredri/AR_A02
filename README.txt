@@ -16,6 +16,7 @@ Q should be either fully orthogonal, semi-orthogonal (for some non-square matric
 
 To run Question 5 results on windows, use either './run_Q5.bat' or 'python python Q5c.py'  
 Results for question 5 are also included in this document.
+Some of the questions in 5 are answered in the pdf rather than this readme.
 
 -----------------------------------------
 The images have the following recorded point coordinates:
